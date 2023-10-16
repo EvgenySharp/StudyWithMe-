@@ -1,0 +1,18 @@
+﻿@using PresentationLayer.Models;
+@using WebApp.Controllers;
+@model FileModel;
+@{
+    ViewData["Title"] = "Загрузить тест";
+}
+
+@{
+    var testModel = Model.TestModel;
+    <form asp-action="SaveTestModel" method="post">
+
+        <input name="DepartmentModel.Name" value="@testModel.DepartmentModel.Name" />
+        <input name="SubjectModel.SecondName" value="@testModel.SubjectModel.SecondName" />
+        <input name="FacultyModel.Name" value="@testModel.FacultyModel.Name" />
+
+        <input type="submit" />
+    </form>
+}

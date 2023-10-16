@@ -1,0 +1,81 @@
+﻿@using PresentationLayer.Models;
+@model FileModel;
+@{
+    ViewData["Title"] = "Загрузить тест";
+}
+<div class="bg-indigo-50 relative isolate">
+    <div class="mx-auto max-w-2xl py-10 sm:py-48 lg:py-10">
+        <div class="text-center">
+            <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl"><br />Приготовьтесь успешно сдать свои учебные тесты</h2>
+            <p class="mt-6 text-lg leading-8 text-gray-600">Получите доступ к широкому спектру предметов и практических вопросов с вариантами ответов, чтобы повысить эффективность вашего тестирования. Загружайте свои собственные вопросы с ответами, чтобы расширить банк вопросов.</p>
+            <div class="mt-10 flex items-center justify-center gap-x-6">
+                <form id="uploadForm" asp-action="Load" enctype="multipart/form-data">
+                    <input id="fileInput" asp-for="File" accept=".html" style="display:none" />
+                    <button class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500
+                        focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" id="uploadButton" type="button">
+                        Загрузить сейчас
+                    </button>
+                    <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Узнать больше <span aria-hidden="true">→</span></a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="bg-indigo-600">
+        <div class="mx-auto max-w-7xl px-6 py-24 sm:pt-32 lg:px-8 lg:py-40">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+                <div style="display: flex;">
+                    <div style="flex: 1;">
+                        <div class="lg:col-span-5">
+                            <h2 class="text-2xl font-bold leading-10 tracking-tight text-gray-900">Часто задаваемые вопросы</h2>
+                            <p class="mt-4 text-base leading-7 text-gray-600">
+                                Не можете найти ответ, который ищете? Обратитесь к нашей<!-- -->
+                                <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">служба поддержки</a>
+                                <!-- -->клиентов.
+                            </p>
+                        </div>
+                    </div>
+                    <div style="flex: 1;">
+                        <div class=" lg:col-span-7 lg:mt-0">
+                            <dl class="space-y-10">
+                                <div>
+                                    <dt class="text-base font-semibold leading-7 text-gray-900">Как я могу получить доступ к списку тем на веб-сайте?</dt>
+                                    <dd class="mt-2 text-base leading-7 text-gray-600">Вы можете ознакомиться со списком тем на главной странице нашего веб-сайта.</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-base font-semibold leading-7 text-gray-900">Распределены ли вопросы по темам?</dt>
+                                    <dd class="mt-2 text-base leading-7 text-gray-600">Да, у каждого предмета есть свой собственный список вопросов.</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-base font-semibold leading-7 text-gray-900">Могу ли я выбрать уровень сложности вопросов?</dt>
+                                    <dd class="mt-2 text-base leading-7 text-gray-600">Да, вы можете выбрать уровень сложности вопросов в зависимости от ваших предпочтений.</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-base font-semibold leading-7 text-gray-900">Могу ли я загрузить свои собственные вопросы с ответами?</dt>
+                                    <dd class="mt-2 text-base leading-7 text-gray-600">Да, наш веб-сайт позволяет вам загружать вопросы вместе с ответами на них.</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-base font-semibold leading-7 text-gray-900">Сколько вариантов ответа предусмотрено для каждого вопроса?</dt>
+                                    <dd class="mt-2 text-base leading-7 text-gray-600">К каждому вопросу прилагается несколько вариантов ответа на выбор.</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<form id="uploadForm" asp-action="Load" enctype="multipart/form-data">
+    <input id="fileInput" asp-for="File" accept=".html" style="display:none" />
+</form>
+<script>
+    document.getElementById("uploadButton").onclick = function () {
+        document.getElementById("fileInput").click();
+    };
+    document.getElementById("fileInput").onchange = function () {
+        document.getElementById("uploadForm").submit();
+    };
+</script>
