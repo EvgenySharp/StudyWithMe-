@@ -1,15 +1,6 @@
 ﻿using BusinessLayer;
-using BusinessLayer.AuxiliaryClasses;
-using BusinessLayer.Implementations;
 using DataLayer.Entityes;
-using HtmlAgilityPack;
 using PresentationLayer.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PresentationLayer.Servieces
 {

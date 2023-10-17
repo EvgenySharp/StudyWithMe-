@@ -1,14 +1,6 @@
-﻿using BusinessLayer.AuxiliaryClasses;
-using BusinessLayer.Interfaces;
+﻿using BusinessLayer.Interfaces;
 using DataLayer;
 using DataLayer.Entityes;
-using HtmlAgilityPack;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLayer.Implementations
 {

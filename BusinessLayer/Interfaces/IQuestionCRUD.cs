@@ -1,10 +1,4 @@
-﻿using BusinessLayer.AuxiliaryClasses;
-using DataLayer.Entityes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataLayer.Entityes;
 
 namespace BusinessLayer.Interfaces
 {

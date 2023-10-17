@@ -1,5 +1,4 @@
-﻿using BusinessLayer.Interfaces;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 
 namespace BusinessLayer.AuxiliaryClasses
 {
