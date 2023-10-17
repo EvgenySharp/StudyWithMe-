@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using DataLayer.Enums;
+using HtmlAgilityPack;
 
 namespace BusinessLayer.AuxiliaryClasses
 {
@@ -24,7 +25,7 @@ namespace BusinessLayer.AuxiliaryClasses
         }
 
         public abstract string? AnswerText { get; init; }
-        public abstract bool? IsRight { get; init; }
+        public abstract AnswerStatus AnswerStatus { get; init; }
         public abstract QuestionHtmlNodes Question { get; init; }
 
         private readonly HtmlNode? _questionСontentNode;

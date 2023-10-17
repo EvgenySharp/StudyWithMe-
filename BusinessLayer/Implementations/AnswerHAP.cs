@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.AuxiliaryClasses;
+using DataLayer.Enums;
 using HtmlAgilityPack;
 
 namespace BusinessLayer.Implementations
@@ -6,7 +7,7 @@ namespace BusinessLayer.Implementations
     public class AnswerHAP : AnswerHtmlNodes
     {
         public override string? AnswerText { get; init; }
-        public override bool? IsRight { get; init; }
+        public override AnswerStatus AnswerStatus { get; init; }
         public override QuestionHtmlNodes Question { get; init; }
 
         private readonly string? _questionModifier;
@@ -21,17 +22,17 @@ namespace BusinessLayer.Implementations
             _numberofpoints = question.NumberOfPoints;
         }
 
-        public AnswerHAP(string answerText, bool? isRight, QuestionHtmlNodes question) : base()
+        public AnswerHAP(string answerText, AnswerStatus answerStatus, QuestionHtmlNodes question) : base()
         {
             Question = question;
             AnswerText = answerText;
-            IsRight = isRight;
+            AnswerStatus = answerStatus;
         }
 
         public override string ToString()
         {
-            if (IsRight == null) return $"{AnswerText} нет данных";
-            return $"{AnswerText} {Convert.ToBoolean(IsRight)}";
+            if (AnswerStatus == null) return $"{AnswerText} нет данных";
+            return $"{AnswerText} {Convert.ToBoolean(AnswerStatus)}";
         }
 
         public List<AnswerHtmlNodes> GetAnswerList()
@@ -43,14 +44,13 @@ namespace BusinessLayer.Implementations
                 string questionResult = words[words.Length - 1];
                 foreach (var answer in _answersNodes)
                 {
+                    AnswerStatus answerStatus = AnswerStatus.NoData;
                     string answerResult = string.Empty;
                     string answerText = string.Empty;
-                    bool? isRight;
-                    bool isWrong;
                     if (_questionModifier.StartsWith("que multichoice deferredfeedback"))
                     {
                         int answerResIndex = 0;
-                        answerResult = answer.Attributes[answerResIndex].Value.Split(" ")[0];
+                        answerResult = answer.Attributes[answerResIndex].Value.Split(" ").Last();
                         answerText = answer.InnerText;
                     }
                     else if (_questionModifier.StartsWith("que shortanswer deferredfeedback"))
@@ -58,31 +58,28 @@ namespace BusinessLayer.Implementations
                         answerResult = GetAnswerResultForShortAnswer(answer);
                         answerText = GetAnswerTextForShortAnswer(answer);
                     }
-                    isRight = answerResult == "correct";
-                    isWrong = answerResult == "incorrect";
-                    if (questionResult == "complete")
+                    if (answerResult == "correct")
                     {
-                        if (IsChosenAnswer(answer))
+                        answerStatus = AnswerStatus.Correct;
+                    }
+                    else if (answerResult == "incorrect")
+                    {
+                        answerStatus = AnswerStatus.Wrong;
+                    }
+                    else if (questionResult == "complete" && IsChosenAnswer(answer))
+                    {
+                        if (_numberofpoints > 0.00d)
                         {
-                            if (_numberofpoints > 0.00d)
-                            {
-                                isRight = true;
-                            }
-                            else
-                            {
-                                isWrong = true;
-                            } 
+                            answerStatus = AnswerStatus.Correct;
                         }
-
+                        else
+                        {
+                            answerStatus = AnswerStatus.Wrong;
+                        }
                     }
-                    if (isWrong == false && isRight == false)
-                    {
-                        isRight = null;
-                    }
-                    Answers.Add(new AnswerHAP(answerText, isRight, Question));
+                    Answers.Add(new AnswerHAP(answerText, answerStatus, Question));
                 }
             }
-            
             return Answers;
         }
 

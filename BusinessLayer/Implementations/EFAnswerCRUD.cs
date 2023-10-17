@@ -36,7 +36,7 @@ namespace BusinessLayer.Implementations
 
         public void Update(Answer answer)
         {
-            _dbContext.Entry(answer).Property(a => a.IsRight).IsModified = true;
+            _dbContext.Entry(answer).Property(a => a.AnswerStatus).IsModified = true;
             _dbContext.SaveChanges();
         }
 

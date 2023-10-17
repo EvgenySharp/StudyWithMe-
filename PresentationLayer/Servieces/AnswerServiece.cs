@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using DataLayer.Entityes;
+using DataLayer.Enums;
 using PresentationLayer.Models;
 
 namespace PresentationLayer.Servieces
@@ -29,18 +30,18 @@ namespace PresentationLayer.Servieces
         {
             var answerDb = new Answer();
             answerDb.AnswerText = answerModel.AnswerText;
-            answerDb.IsRight = answerModel.IsRight;
+            answerDb.AnswerStatus = answerModel.AnswerStatus;
             answerDb.Question = _dataManager.Questions.GetByQText(questionText);
             _dataManager.Answers.Create(answerDb);
         }
 
         public void UpdateAnswerModelToDb(AnswerModel answerModel, Answer answerDb)
         {
-            if (answerModel.IsRight == true)
+            if (answerModel.AnswerStatus == AnswerStatus.Correct)
             {
-                if (answerDb.IsRight != true)
+                if (answerDb.AnswerStatus != AnswerStatus.Correct)
                 {
-                    answerDb.IsRight = answerModel.IsRight;
+                    answerDb.AnswerStatus = answerModel.AnswerStatus;
                     _dataManager.Answers.Update(answerDb);
                 }
             }
