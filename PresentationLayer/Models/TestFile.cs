@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace PresentationLayer.Models
 {
-    public class FileModel
+    public class TestFile
     {
         public IFormFile File { get; set; }
-        public HtmlDocument FileAsHtml { get; set; }
+        public TestModel TestModel { get; set; }
     }
 }

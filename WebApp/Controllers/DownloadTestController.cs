@@ -18,20 +18,28 @@ namespace WebApp.Controllers
 
         public IActionResult Index()
         {
-            return View(new FileModel());
+            return View(new TestFile());
         }
 
         [HttpPost]
-        public IActionResult Load(FileModel fileModel)
+        public IActionResult Load(TestFile fileModel)
         {
-            _servicesmanager.FileServiece.Start(fileModel);
-            _testmodel = _servicesmanager.TestService.GetTestModel(fileModel.FileAsHtml);
-            //_servicesmanager.TestService.FacultyServiece.LoadFacultyModelToDb(_testmodel.FacultyModel);
-            //_servicesmanager.TestService.DepartmentServiece.LoadDepartmentModelToDb(_testmodel.DepartmentModel);
-            //_servicesmanager.TestService.SubjectServiece.LoadSubjectModelToDb(_testmodel.SubjectModel);
-            //_servicesmanager.TestService.QuestionServiece.LoadQuestionListModelToDb(_testmodel.QuestionsModel);
-            //_servicesmanager.TestService.AnsverServiece.LoadAnswerListModelToDb(_testmodel.AnswersModel);
-            return View(fileModel);
+            var fileAsHtml = _servicesmanager.FileServiece.GetFileAsHTML(fileModel);
+            var testHAP = _servicesmanager.TestService.GetTestHAP(fileAsHtml);
+            _testmodel = _servicesmanager.TestService.GetTestModel(testHAP);
+            if (_testmodel.ContainsNavigationElements)
+            {
+                //TO DO download the test
+                _servicesmanager.TestService.FacultyServiece.LoadFacultyModelToDb(_testmodel.FacultyModel);
+                _servicesmanager.TestService.DepartmentServiece.LoadDepartmentModelToDb(_testmodel.DepartmentModel);
+                _servicesmanager.TestService.SubjectServiece.LoadSubjectModelToDb(_testmodel.SubjectModel);
+                _servicesmanager.TestService.QuestionServiece.LoadQuestionListModelToDb(_testmodel.QuestionsModel);
+                _servicesmanager.TestService.AnsverServiece.LoadAnswerListModelToDb(_testmodel.AnswersModel);
+            }
+            fileModel.TestModel = _testmodel;
+
+
+            return RedirectToAction("Index");
         }
     }
 }

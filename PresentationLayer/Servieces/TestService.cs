@@ -33,11 +33,14 @@ namespace PresentationLayer.Servieces
             _ansverServiece = new AnswerServiece(_dataManager);
         }
 
-        public TestModel GetTestModel(HtmlDocument htmlDoc)
+        public TestHAP GetTestHAP(HtmlDocument htmlDoc)
         {
-            var testhap = new TestHAP(htmlDoc);
-            var testModel = new TestModel(testhap);
-            return testModel;
+            return new TestHAP(htmlDoc);
+        }
+
+        public TestModel GetTestModel(TestHAP testhap)
+        {
+            return new TestModel(testhap);
         }
     }
 }

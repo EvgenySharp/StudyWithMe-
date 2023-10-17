@@ -18,7 +18,7 @@ namespace WebApp.Controllers
 
         public IActionResult Index()
         {
-            return View(new FileModel());
+            return View(new TestFile());
         }
 
         public IActionResult Privacy()
