@@ -15,7 +15,7 @@ namespace PresentationLayer.Servieces
 
         public void LoadFacultyModelToDb(FacultyModel facultyModel)
         {
-            var facultyDb = _dataManager.Facultys.GetByName(facultyModel.Name);
+            var facultyDb = _dataManager.Facultys.GetByNameOrNullIfNotFound(facultyModel.Name);
             var IsInDataBase = facultyDb != null;
             if (!IsInDataBase)
                 SaveFacultyModelToDb(facultyModel);

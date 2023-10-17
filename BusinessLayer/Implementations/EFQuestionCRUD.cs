@@ -29,9 +29,9 @@ namespace BusinessLayer.Implementations
             throw new NotImplementedException();
         }
 
-        public Question GetByQText(string questionText, bool includeAnswers = false)
+        public Question? GetByQTextOrNullIfNotFound(string questionText, bool includeAnswers = false)
         {
-            return _dbContext.Question.FirstOrDefault(q => q.QuestionText == questionText) ?? new Question();
+            return _dbContext.Question.FirstOrDefault(q => q.QuestionText == questionText);
         }
 
         public void Update(Question question)

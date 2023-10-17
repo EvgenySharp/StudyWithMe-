@@ -14,7 +14,7 @@ namespace PresentationLayer.Servieces
 
         public void LoadDepartmentModelToDb(DepartmentModel departmentModel)
         {
-            var departmentDb = _dataManager.Departments.GetByName(departmentModel.Name);
+            var departmentDb = _dataManager.Departments.GetByNameOrNullIfNotFound(departmentModel.Name);
             var IsInDataBase = departmentDb != null;
             if (!IsInDataBase)
                 SaveDepartmentModelToDb(departmentModel);

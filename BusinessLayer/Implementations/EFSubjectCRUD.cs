@@ -29,12 +29,12 @@ namespace BusinessLayer.Implementations
 			throw new NotImplementedException();
 		}
 
-		public Subject GetByName(string subjectName, bool includeQuestions = false)
+        public Subject? GetByNameOrNullIfNotFound(string subjectName, bool includeQuestions = false)
         {
-            return _dbContext.Subject.FirstOrDefault(s => s.SubjectName == subjectName) ?? new Subject();
+            return _dbContext.Subject.FirstOrDefault(s => s.SubjectName == subjectName);
         }
 
-		public void Update(Subject subject)
+        public void Update(Subject subject)
 		{
 			throw new NotImplementedException();
         }

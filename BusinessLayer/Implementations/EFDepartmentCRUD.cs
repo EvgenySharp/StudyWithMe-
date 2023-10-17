@@ -29,12 +29,12 @@ namespace BusinessLayer.Implementations
 			throw new NotImplementedException();
 		}
 
-		public Department GetByName(string departmentName, bool includeSubjects = false)
+        public Department? GetByNameOrNullIfNotFound(string departmentName, bool includeSubjects = false)
         {
-            return _dbContext.Department.FirstOrDefault(d => d.DepartmentName == departmentName) ?? new Department();
+            return _dbContext.Department.FirstOrDefault(d => d.DepartmentName == departmentName);
         }
 
-		public void Update(Department department)
+        public void Update(Department department)
 		{
 			throw new NotImplementedException();
 		}

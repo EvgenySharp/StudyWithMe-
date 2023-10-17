@@ -14,7 +14,7 @@ namespace PresentationLayer.Servieces
 
         public void LoadSubjectModelToDb(SubjectModel subjectModel)
         {
-            var questionDb = _dataManager.Subjects.GetByName(subjectModel.ActualName);
+            var questionDb = _dataManager.Subjects.GetByNameOrNullIfNotFound(subjectModel.ActualName);
             bool IsInDataBase = questionDb != null;
             if (IsInDataBase!)
                 SaveSubjectModelToDb(subjectModel);

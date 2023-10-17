@@ -17,7 +17,7 @@ namespace PresentationLayer.Servieces
         {
             foreach (var answerModel in answerModels)
             {
-                var answerDb = _dataManager.Answers.GetByAText(answerModel.AnswerText);
+                var answerDb = _dataManager.Answers.GetByATextOrNullIfNotFound(answerModel.AnswerText);
                 bool IsInDataBase = answerDb != null;
                 if (IsInDataBase)
                     UpdateAnswerModelToDb(answerModel, answerDb);
@@ -31,7 +31,7 @@ namespace PresentationLayer.Servieces
             var answerDb = new Answer();
             answerDb.AnswerText = answerModel.AnswerText;
             answerDb.AnswerStatus = answerModel.AnswerStatus;
-            answerDb.Question = _dataManager.Questions.GetByQText(questionText);
+            answerDb.Question = _dataManager.Questions.GetByQTextOrNullIfNotFound(questionText);
             _dataManager.Answers.Create(answerDb);
         }
 

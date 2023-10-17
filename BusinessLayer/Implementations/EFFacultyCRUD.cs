@@ -29,12 +29,12 @@ namespace BusinessLayer.Implementations
 			throw new NotImplementedException();
 		}
 
-		public Faculty GetByName(string facultyName, bool includeDepartments = false)
-		{
-            return _dbContext.Faculty.FirstOrDefault(f => f.FacultyName == facultyName) ?? new Faculty();
-		}
+        public Faculty? GetByNameOrNullIfNotFound(string facultyName, bool includeDepartments = false)
+        {
+            return _dbContext.Faculty.FirstOrDefault(f => f.FacultyName == facultyName);
+        }
 
-		public void Update(Faculty faculty)
+        public void Update(Faculty faculty)
 		{
 			throw new NotImplementedException();
         }

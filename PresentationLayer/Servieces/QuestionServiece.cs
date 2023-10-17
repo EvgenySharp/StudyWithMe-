@@ -18,7 +18,7 @@ namespace PresentationLayer.Servieces
         {
             foreach (var questionModel in questionModels)
             {
-                var questionDb = _dataManager.Questions.GetByQText(questionModel.QuestionText);
+                var questionDb = _dataManager.Questions.GetByQTextOrNullIfNotFound(questionModel.QuestionText);
                 var IsInDataBase = questionDb != null;
                 if (IsInDataBase)
                     UpdateQuestionModelToDb(questionModel, questionDb);
